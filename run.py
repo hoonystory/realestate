@@ -5,7 +5,6 @@ from src.utils.log import logger
 
 def main():
     logger.debug('init main')
-    logger.debug(const.api_access_key)
     apt.get_real_txn_apt_trade('11110', '202001', const.api_access_key)
 
 

@@ -15,10 +15,9 @@ class Request:
             logger.error('empty url value!')
             return
         else:
-            res = urllib.request.urlopen(self.url)
-            result = res.read()
-            soup = BeautifulSoup(result, 'lxml-xml')
-            items = soup.find_all('item')
+            result = urllib.request.urlopen(self.url).read()
+            result_items = BeautifulSoup(result, 'lxml-xml').find_all('item')
 
-            logger.debug(soup)
-            logger.debug(items)
+            for i in result_items:
+                logger.debug('dealamount: ' + i.find("거래금액").text)
+                logger.debug(i)
