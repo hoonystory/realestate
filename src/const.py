@@ -12,6 +12,14 @@ def constant(func):
 # const class
 # noinspection PyMethodParameters
 class Const(object):
+    # instance = None
+    #
+    # def __new__(cls, *args, **kwargs):
+    #     if not hasattr(cls, 'instance'):
+    #         cls.instance = super(Const, cls).__new__(cls)
+    #     else:
+    #         return cls.instance
+
     @constant
     def api_access_key():
         return 'Ak5ExMq7svgb45fKdmgOJOaWOOrp5KAa7LUiJ1fc7cRujpLh5bVWLtnfzd1ft0nuLT0nZiTv9T1u7vLoVw5Kzg=='
@@ -27,3 +35,6 @@ class Const(object):
     @constant
     def svc_sht_trade_url():
         return '/getRTMSDataSvcSHTrade'
+
+
+const = Const()

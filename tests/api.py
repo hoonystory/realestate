@@ -11,7 +11,7 @@ svc_apt_trade_url = '/getRTMSDataSvcAptTrade'
 svc_sht_trade_url = '/getRTMSDataSvcSHTrade'
 
 
-def getRTMSDataSvcAptTrade(LAWD_CD, DEAL_YMD, serviceKey):
+def get_real_txn_apt_trade(LAWD_CD, DEAL_YMD, serviceKey):
 
     from_array = URLQueryString() \
         .set('LAWD_CD', LAWD_CD) \
@@ -28,4 +28,4 @@ def getRTMSDataSvcAptTrade(LAWD_CD, DEAL_YMD, serviceKey):
     return
 
 
-getRTMSDataSvcAptTrade('11110', '202001', api_access_key)
+get_real_txn_apt_trade('11110', '202001', api_access_key)

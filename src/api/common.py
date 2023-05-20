@@ -3,11 +3,11 @@ from bs4 import BeautifulSoup
 from src.utils.log import logger
 
 
-class RequestApi:
+class Request:
     def __init__(self):
         self.url = ''
 
-    def setUrl(self, url):
+    def set_url(self, url):
         self.url = url
 
     def get_request_result(self):

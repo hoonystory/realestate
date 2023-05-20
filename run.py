@@ -1,11 +1,12 @@
 from src.api import apt
-from src.const import Const
+from src.const import const
 from src.utils.log import logger
 
 
 def main():
     logger.debug('init main')
-    apt.getRTMSDataSvcAptTrade('11110', '202001', Const.api_access_key)
+    logger.debug(const.api_access_key)
+    apt.get_real_txn_apt_trade('11110', '202001', const.api_access_key)
 
 
 if __name__ == '__main__':
