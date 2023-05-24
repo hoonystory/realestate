@@ -24,14 +24,19 @@ class Request:
         else:
             result = urllib.request.urlopen(self.url).read()
             result_items = BeautifulSoup(result, 'lxml-xml').find_all('item')
-            result_array = []
+            result_list = []
 
             for i in result_items:
                 result_item = []
-                for value in const.get_data_result_column(self.key).items():
+                for key, value in const.get_data_result_column(self.key).items():
                     result_item.append(i.find(value).text.strip())
-                result_array.append(result_item)
+                result_list.append(result_item)
                 # logger.debug(i)
 
-            logger.debug(result_items)
-            logger.debug(result_array)
+            return result_list
+
+    def get_data_result_column_array(self):
+        result_array = []
+        for key, value in const.get_data_result_column(self.key).items():
+            result_array.append(key)
+        return result_array
