@@ -1,9 +1,25 @@
+import os
+from pathlib import Path
+
+
 def get_request_info(key):
     return api_info.get(key, '')
 
 
 def get_data_result_column(key):
     return columns.get(key, [])
+
+
+def get_project_root_path():
+    return Path(__file__).parent.parent
+
+
+def get_database_path():
+    return os.path.join(get_project_root_path(), 'db')
+
+
+def get_resource_path():
+    return os.path.join(get_project_root_path(), 'resources')
 
 
 api_info = {

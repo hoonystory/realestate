@@ -1,7 +1,7 @@
 from src.utils.log import logger
 from src.utils.url import URLQueryString
 from src.api.request import Request
-from src.utils import data as from_data
+from src.utils import data_frame as from_data
 
 
 def get_real_txn_apt_trade(LAWD_CD, DEAL_YMD):
