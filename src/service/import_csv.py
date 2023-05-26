@@ -1,7 +1,7 @@
 import pandas as pd
 from src.utils import db
 from src.utils import file_path as from_variables
-from src.model import table
+from src.model import table as from_table
 from src import const
 
 

@@ -1,5 +1,5 @@
 from src.utils import db
-from src.model import table
+from src.model import table as from_table
 from src.utils.log import logger
 
 

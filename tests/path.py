@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from src.model import table
+from src.model import table as from_table
 
 
 # find the project root path
