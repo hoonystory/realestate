@@ -1,18 +1,15 @@
 import pandas as pd
-import os.path
 from src.utils import db
-from src.utils import db_table as from_database
 from src.utils import file_path as from_variables
 from src.model import table
 from src import const
-from src.utils.log import logger
 
 
 def import_csv(file_nm, db_name, table_name):
     db_instance = db.Sqlite3(db_name)
     file_path = from_variables.get_file_path(const.get_resource_path(), file_nm)
 
-    if os.path.exists(file_path):
+    if from_variables.is_file_exists(file_path):
         df = pd.read_csv(file_path, sep='\t', engine='python', encoding='cp949')
         table_columns = table.get_database_table_info(db_name, table_name)
         if table_columns:
