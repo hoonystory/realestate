@@ -30,3 +30,14 @@ def create_result_data_frame(result_instance):
     logger.info(df)
 
     return df
+
+
+def verify_inserted_data(db_instance, table_name):
+    select_sql = 'select * from ' + table_name
+    condition_sql = ' limit 5'
+    db_instance.cursor.execute(select_sql + condition_sql)
+
+    rows = db_instance.cursor.fetchall()
+    cols = [column[0] for column in db_instance.cursor.description]
+    df = pd.DataFrame.from_records(data=rows, columns=cols)
+    print(df)

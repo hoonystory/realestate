@@ -1,6 +1,7 @@
 from src.utils.log import logger
 from src.utils.url import URLQueryString
 from src.api.request import Request
+from src.utils import db
 from src.utils import data_frame as from_data
 
 
@@ -26,7 +27,13 @@ def get_real_txn_apt_trade(LAWD_CD, DEAL_YMD):
     # convert result list into pandas data frame for saving into database
     data_frame = from_data.create_result_data_frame(result_list)
 
-    # todo: save data from result
-    # todo: show chart from database data
+    # save data from result
+    db_instance = db.Sqlite3('data')
+    data_frame.to_sql('real_txn_apt_trade', db_instance.conn, if_exists='replace'
+              , schema=None, index=False, index_label=None, chunksize=None, dtype=None)
+    from_data.verify_inserted_data(db_instance, 'real_txn_apt_trade')
+
+    # show chart from database data
 
     return
+

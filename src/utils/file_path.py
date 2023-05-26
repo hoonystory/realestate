@@ -14,7 +14,8 @@ def is_file_exists(file_path):
 
 
 def get_project_root_path():
-    return Path(__file__).parent.parent
+    # Path(__file__).parent.parent
+    return '/Users/hoony/IdeaProjects/realestate'
 
 
 def get_database_path():

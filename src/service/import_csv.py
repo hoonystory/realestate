@@ -20,19 +20,8 @@ def import_csv(file_nm, db_name, table_name):
         df.to_sql(table_name, db_instance.conn, if_exists='replace'
                   , schema=None, index=False, index_label=None, chunksize=None, dtype=None)
 
-    verify_imported_data(db_instance, table_name)
+    # verify_inserted_data(db_instance, table_name)
     db_instance.conn.close()
-
-
-def verify_imported_data(db_instance, table_name):
-    select_sql = 'select * from ' + table_name
-    condition_sql = ' limit 5'
-    db_instance.cursor.execute(select_sql + condition_sql)
-
-    rows = db_instance.cursor.fetchall()
-    cols = [column[0] for column in db_instance.cursor.description]
-    df = pd.DataFrame.from_records(data=rows, columns=cols)
-    print(df)
 
     # for row in rows:
     #     logger.info(row)
