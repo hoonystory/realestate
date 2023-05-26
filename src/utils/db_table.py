@@ -11,7 +11,7 @@ def get_conn_and_create_table_if_empty(db_name, table_name):
 
     result = db_instance.cursor.fetchone()
     if result[0] != 1:
-        table_info = table.get_database_table_info(db_name, table_name)
+        table_info = table.get_table_info_from_database(db_name, table_name)
         if table_info:
             column_array = []
             for key, value in table_info.items():

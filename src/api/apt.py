@@ -19,10 +19,12 @@ def get_real_txn_apt_trade(LAWD_CD, DEAL_YMD):
         .set('LAWD_CD', LAWD_CD) \
         .set('DEAL_YMD', DEAL_YMD)
 
+    # set url info and get result list by requesting api
     from_request_info.set_url('real_txn_apt_trade', url_object)
-    result_list = from_request_info.get_request_result()
+    result_list = from_request_info.get_request_result_by_xml()
 
-    from_data.create_result_data_frame(result_list, from_request_info.get_data_result_column_array())
+    # convert result list into pandas data frame for saving into database
+    data_frame = from_data.create_result_data_frame(result_list)
 
     # todo: save data from result
     # todo: show chart from database data

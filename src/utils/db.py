@@ -8,7 +8,10 @@ class Sqlite3:
     conn = None
     cursor = None
 
-    def __init__(self, db_name):
-        self.db_path = from_variables.get_file_path(const.get_database_path(), db_name + '.db')
+    def __init__(self, *args):
+        # set database file path with first argument
+        if len(args) != 0:
+            self.db_path = from_variables.get_file_path(const.get_database_path(), args[0] + '.db')
+
         self.conn = sqlite3.connect(self.db_path)
         self.cursor = self.conn.cursor()

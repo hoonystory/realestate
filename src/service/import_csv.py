@@ -11,7 +11,7 @@ def import_csv(file_nm, db_name, table_name):
 
     if from_variables.is_file_exists(file_path):
         df = pd.read_csv(file_path, sep='\t', engine='python', encoding='cp949')
-        table_columns = table.get_database_table_info(db_name, table_name)
+        table_columns = table.get_table_info_from_database(db_name, table_name)
         if table_columns:
             column_array = []
             for key, value in table_columns.items():
