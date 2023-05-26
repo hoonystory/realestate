@@ -80,6 +80,23 @@ print(result)
 need_to_parse_list = [ 'integer' , 'real' ]
 print(need_to_parse_list.count('integer'))
 
+# dictionary test
+table_test = {
+    'test': {
+        'two_depth': ''
+    }
+}
+print(table_test.get('test2'))
+
+
+# list test
+from src.model import table
+result_list = table.get_data_result_column('lawd_cd')
+for i in result_list:
+    print(i)
+
+for i in range(len(result_list)):
+    print(i)
 
 # test logger
 # logger.info('test')

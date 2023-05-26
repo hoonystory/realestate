@@ -1,7 +1,6 @@
 class Table:
     def __init__(self, tbl):
-        self.columns_info = None
-        self.columns_array = []
+        self.meta_info = None
         self.get_table_columns_info(table, tbl)
 
     def get_table_columns_info(self, d, tbl):
@@ -14,9 +13,7 @@ class Table:
         for k, v in d.items():
             if k == tbl:
                 # set table columns information
-                self.columns_info = v
-                for key, value in self.columns_info.items():
-                    self.columns_array.append(key)
+                self.meta_info = v
             if isinstance(v, dict):
                 self.get_table_columns_info(v, tbl)
 
@@ -38,30 +35,60 @@ def get_table_info_from_database(db, tbl):
             return False
 
 
-DATABASE_CODE = 'code'
-DATABASE_DATA = 'data'
+def get_data_result_info(tbl, key):
+    table_info = table.get(tbl)
+    if table_info:
+        return table_info.get(key, [])
+    return []
+
+
+def get_data_result_column(tbl):
+    return get_data_result_info(tbl, 'columns')
+
+
+def get_data_result_description(tbl):
+    return get_data_result_info(tbl, 'description')
+
+
+def get_data_result_type(tbl):
+    return get_data_result_info(tbl, 'type')
+
+# DATABASE_CODE = 'code'
+# DATABASE_DATA = 'data'
+
 
 table = {
-    DATABASE_CODE: {
-        'lawd_cd': {
-            'lawd_cd': 'integer'
-            , 'dong_nm': 'text'
-            , 'exyn': 'text'
-        }
+    'lawd_cd': {
+        'columns': [
+            'lawd_cd', 'dong_nm', 'exyn'
+        ],
+        'type': [
+            'integer', 'text', 'text'
+        ],
+        'description': [
+            '법정동코드', '법정동명', '폐지여부'
+        ],
+        'database': 'code'
     },
-    DATABASE_DATA: {
-        'real_txn_apt_trade': {
-            'dealAmount': 'integer'
-            , 'buildYear': 'integer'
-            , 'dealYear': 'integer'
-            , 'dong': 'text'
-            , 'apartment': 'text'
-            , 'dealMonth': 'integer'
-            , 'dealDay': 'integer'
-            , 'exclusiveArea': 'text'
-            , 'jibun': 'text'
-            , 'regionCode': 'integer'
-            , 'floor': 'integer'
-        }
+    'real_txn_apt_trade': {
+        'columns': [
+            'dealAmount', 'buildYear', 'dealYear'
+            , 'dong', 'apartment', 'dealMonth'
+            , 'dealDay', 'exclusiveArea', 'jibun'
+            , 'regionCode', 'floor'
+        ],
+        'type': [
+            'integer', 'integer', 'integer'
+            , 'text', 'text', 'integer'
+            , 'integer', 'text', 'text'
+            , 'integer', 'integer'
+        ],
+        'description': [
+            '거래금액', '건축년도', '년'
+            , '법정동', '아파트', '월'
+            , '일', '전용면적', '지번'
+            , '지역코드', '층'
+        ],
+        'database': 'data'
     }
 }

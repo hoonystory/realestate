@@ -7,7 +7,7 @@ from src import const
 
 def import_csv(file_nm, db_name, table_name):
     db_instance = db.Sqlite3(db_name)
-    file_path = from_variables.get_file_path(const.get_resource_path(), file_nm)
+    file_path = from_variables.get_file_path(from_variables.get_resource_path(), file_nm)
 
     if from_variables.is_file_exists(file_path):
         df = pd.read_csv(file_path, sep='\t', engine='python', encoding='cp949')

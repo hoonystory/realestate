@@ -1,6 +1,5 @@
 import pandas as pd
 from src.model.table import Table
-from src.model import table as from_table
 from src.utils.log import logger
 
 
@@ -10,22 +9,23 @@ def create_result_data_frame(result_instance):
     :return: df
     """
     # parse each data into appropriate data type
-    table_info = Table(result_instance.get_key())
+    from_table = Table(result_instance.get_key())
 
     # for item in result_instance.get_result_list():
+    column_type = from_table.meta_info.get('type')
+    for i in range(len(column_type)):
+        need_to_parse_type_list = ['integer', 'real']
+        current_column_type = column_type[i]
 
-    for key, value in table_info.columns_info.items():
-        need_to_parse_list = ['integer', 'real']
-        if need_to_parse_list.count(value) != 0:
+        if need_to_parse_type_list.count(current_column_type) != 0:
             for item in result_instance.get_result_list():
-                index = table_info.columns_array.index(key)
-                if value == 'integer':
-                    item[index] = int(item[index].replace(',',''))
-                if value == 'real':
-                    item[index] = float(item[index])
+                if current_column_type == 'integer':
+                    item[i] = int(item[i].replace(',', ''))
+                if current_column_type == 'real':
+                    item[i] = float(item[i])
 
     df = pd.DataFrame(result_instance.get_result_list()
-                      , columns=table_info.columns_array) # , dtype=table_info.columns_info
+                      , columns=from_table.meta_info.get('columns')) # , dtype=table_info.columns_info
     df.info()
     logger.info(df)
 

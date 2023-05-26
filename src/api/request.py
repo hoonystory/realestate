@@ -30,15 +30,9 @@ class Request:
             for i in result_items:
                 result_item = []
                 # parse xml into python list data
-                for key, value in const.get_data_result_column(self.key).items():
-                    result_item.append(i.find(value).text.strip())
+                for description in table.get_data_result_description(self.key):
+                    result_item.append(i.find(description).text.strip())
 
                 result_list.get_result_list().append(result_item)
 
             return result_list
-
-    def get_data_result_column_array(self):
-        result_array = []
-        for key, value in const.get_data_result_column(self.key).items():
-            result_array.append(key)
-        return result_array
