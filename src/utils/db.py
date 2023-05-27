@@ -15,3 +15,12 @@ class Sqlite3:
 
         self.conn = sqlite3.connect(self.db_path)
         self.cursor = self.conn.cursor()
+
+    def execute_query(self, query):
+        return self.cursor.execute(query)
+
+    def fetch_all(self):
+        return self.cursor.fetchall()
+
+    def get_columns(self):
+        return [column[0] for column in self.cursor.description]

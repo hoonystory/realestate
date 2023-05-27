@@ -31,7 +31,7 @@ def get_real_txn_apt_trade(LAWD_CD, DEAL_YMD):
     db_instance = db.Sqlite3('data')
     data_frame.to_sql('real_txn_apt_trade', db_instance.conn, if_exists='replace'
               , schema=None, index=False, index_label=None, chunksize=None, dtype=None)
-    from_data.verify_inserted_data(db_instance, 'real_txn_apt_trade')
+    from_data.verify_insert_data(db_instance, 'real_txn_apt_trade')
 
     # show chart from database data
 

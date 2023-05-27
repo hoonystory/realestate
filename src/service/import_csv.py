@@ -20,7 +20,7 @@ def import_csv(file_nm, db_name, table_name):
         df.to_sql(table_name, db_instance.conn, if_exists='replace'
                   , schema=None, index=False, index_label=None, chunksize=None, dtype=None)
 
-    # verify_inserted_data(db_instance, table_name)
+    # verify_insert_data(db_instance, table_name)
     db_instance.conn.close()
 
     # for row in rows:
