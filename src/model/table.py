@@ -35,7 +35,7 @@ def get_table_info_from_database(db, tbl):
             return False
 
 
-def get_data_result_info(tbl, key):
+def get_specific_table_info(tbl, key):
     table_info = table.get(tbl)
     if table_info:
         return table_info.get(key, [])
@@ -43,15 +43,19 @@ def get_data_result_info(tbl, key):
 
 
 def get_data_result_column(tbl):
-    return get_data_result_info(tbl, 'columns')
+    return get_specific_table_info(tbl, 'columns')
 
 
 def get_data_result_description(tbl):
-    return get_data_result_info(tbl, 'description')
+    return get_specific_table_info(tbl, 'description')
 
 
-def get_data_result_type(tbl):
-    return get_data_result_info(tbl, 'type')
+def get_table_columns_type(tbl):
+    return get_specific_table_info(tbl, 'type')
+
+
+def get_table_request_params(tbl):
+    return get_specific_table_info(tbl, 'request')
 
 # DATABASE_CODE = 'code'
 # DATABASE_DATA = 'data'
@@ -72,10 +76,10 @@ table = {
     },
     'real_txn_apt_trade': {
         'columns': [
-            'dealAmount', 'buildYear', 'dealYear'
-            , 'dong', 'apartment', 'dealMonth'
-            , 'dealDay', 'exclusiveArea', 'jibun'
-            , 'regionCode', 'floor'
+            'deal_amount', 'build_year', 'deal_year'
+            , 'dong_nm', 'apartment', 'deal_month'
+            , 'deal_day', 'exclusive_area', 'jibun'
+            , 'lawd_cd', 'floor'
         ],
         'type': [
             'integer', 'integer', 'integer'
@@ -88,6 +92,9 @@ table = {
             , '법정동', '아파트', '월'
             , '일', '전용면적', '지번'
             , '지역코드', '층'
+        ],
+        'request': [
+            'lawd_cd', 'deal_ymd'
         ],
         'database': 'data'
     }

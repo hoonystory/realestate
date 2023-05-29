@@ -5,33 +5,41 @@ from src.utils import db
 from src.utils import data_frame as from_data
 
 
-def get_real_txn_apt_trade(LAWD_CD, DEAL_YMD):
+def get_real_txn_apt_trade(params):
     """
     국토교통부 아파트매매 실거래자료
-    :param LAWD_CD:
-    :param DEAL_YMD:
+    :param params:
     :return:
     """
 
     logger.debug('request for data on real transaction price of apartment trade')
 
-    from_request_info = Request()
-    url_object = URLQueryString() \
-        .set('LAWD_CD', LAWD_CD) \
-        .set('DEAL_YMD', DEAL_YMD)
+    db_table_nm = params.table_nm
+    db_instance = db.Sqlite3('data')
+
+    # before request api, check database if it already has selected data
+    verify_query = 'select exists ( ' \
+                   'select 1 ' \
+                   'from ' + db_table_nm + \
+                   'where lawd_cd like "11110%" and deal_ymd like "" ' \
+                   'limit 5 )'
 
     # set url info and get result list by requesting api
-    from_request_info.set_url('real_txn_apt_trade', url_object)
+    from_request_info = Request()
+    url_object = URLQueryString()
+    for key, value in params.dict:
+        url_object.set(key, value)
+
+    from_request_info.set_url(db_table_nm, url_object)
     result_list = from_request_info.get_request_result_by_xml()
 
     # convert result list into pandas data frame for saving into database
     data_frame = from_data.create_result_data_frame(result_list)
 
     # save data from result
-    db_instance = db.Sqlite3('data')
-    data_frame.to_sql('real_txn_apt_trade', db_instance.conn, if_exists='replace'
+    data_frame.to_sql(db_table_nm, db_instance.conn, if_exists='replace'
               , schema=None, index=False, index_label=None, chunksize=None, dtype=None)
-    from_data.verify_insert_data(db_instance, 'real_txn_apt_trade')
+    from_data.verify_insert_data(db_instance, db_table_nm)
 
     # show chart from database data
 

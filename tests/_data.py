@@ -106,3 +106,12 @@ for i in range(len(result_list)):
 # converted_to_float = float(float_string)
 # print(converted_to_float)
 # print(type(converted_to_float))
+
+
+# test parameter class
+from src.model.param import Parameter
+_param = Parameter({
+    'test': 'test_value'
+    , 'test2': 'test2 value'
+})
+print(_param)
