@@ -27,7 +27,7 @@ def get_real_txn_apt_trade(params):
     # set url info and get result list by requesting api
     from_request_info = Request()
     url_object = URLQueryString()
-    for key, value in params.dict:
+    for key, value in params.dict.items():
         url_object.set(key, value)
 
     from_request_info.set_url(db_table_nm, url_object)
