@@ -12,6 +12,8 @@
 .idea/**/dictionaries
 .idea/**/shelf
 
+resources/private/accessKey
+
 # AWS User-specific
 .idea/**/aws.xml
 
