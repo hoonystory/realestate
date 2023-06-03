@@ -13,6 +13,7 @@
 .idea/**/shelf
 
 resources/private/accessKey
+db/data.db
 
 # AWS User-specific
 .idea/**/aws.xml
